@@ -2,9 +2,9 @@ import React from 'react';
 import Budget from './budget/budget';
 
 let commitments = [
-  { code: 'rent', name : 'Rent' },
-  { code: 'bills', name : 'Bills' },
-  { code: 'mobile', name : 'Mobile' }
+  { code: 'rent', name : 'Rent', amount: 425 },
+  { code: 'bills', name : 'Bills', amount: 120 },
+  { code: 'mobile', name : 'Mobile', amount: 35 }
 ];
 
 class App extends React.Component {
