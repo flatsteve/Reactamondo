@@ -1,0 +1,6 @@
+@import '../variables.css';
+
+.budget {
+  color: var(--blue);
+  padding: 1rem;
+}
