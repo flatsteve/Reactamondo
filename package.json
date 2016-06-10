@@ -1,7 +1,7 @@
 {
   "name": "Reactamondo",
   "version": "1.0.0",
-  "description": "React starter pack",
+  "description": "Get me to the range!",
   "main": "app/main.js",
   "scripts": {
     "start": "webpack-dev-server --hot --inline",
@@ -19,6 +19,8 @@
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "css-loader": "^0.23.1",
+    "eslint": "^2.11.1",
+    "eslint-plugin-react": "^5.1.1",
     "file-loader": "^0.8.5",
     "postcss-browser-reporter": "^0.5.0",
     "postcss-cssnext": "^2.6.0",

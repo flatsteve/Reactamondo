@@ -1,0 +1,11 @@
+@import '../variables.css';
+
+.departures-entry {
+  align-items: center;
+  background-color: var(--teal);
+  color: var(--yellow);
+  display: flex;
+  font-family: monospace;
+  padding: 1.25rem;
+  margin-bottom: .75rem;
+}
