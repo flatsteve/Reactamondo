@@ -1,0 +1,22 @@
+@import '../../variables.css';
+
+.departures-entry {
+  align-items: center;
+  background-color: var(--teal);
+  color: var(--yellow);
+  display: flex;
+  font-family: monospace;
+  margin-bottom: .25rem;
+
+  &__number {
+    background-color: var(--red);
+    color: white;
+    height: 100%;
+    padding: .75rem 1.25rem;
+    margin-right: 1.25rem;
+  }
+
+  &__arrival {
+    margin: 0 1.25rem 0 auto;
+  }
+}

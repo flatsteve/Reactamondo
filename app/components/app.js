@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Departures from './departures.js';
+import Departures from './departures/departures.js';
 
 class App extends React.Component {
   render() {

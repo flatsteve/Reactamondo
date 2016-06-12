@@ -1,0 +1,11 @@
+@import '../../variables.css';
+
+.departures__title {
+  color: var(--yellow);
+  margin-bottom: 1.25rem;
+}
+
+.departures__board {
+  border: .25rem solid black;
+  background-color: black;
+}
