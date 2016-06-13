@@ -2,6 +2,8 @@ var webpack = require('webpack');
 
 module.exports = {
   context: __dirname + '/app',
+  devtool: 'source-map',
+
   entry: {
     javascript: './main.js',
     html: './index.html'
@@ -25,7 +27,7 @@ module.exports = {
         test: /\.css$/,
         loader: "style-loader!css-loader!postcss-loader"
       },
-      // Html
+      // Html - copy file
       {
         test: /\.html$/,
         loader: "file?name=[name].[ext]",
@@ -40,6 +42,6 @@ module.exports = {
       require("postcss-cssnext")(),
       require("postcss-browser-reporter")(),
       require("postcss-reporter")(),
-    ]
+    ];
   }
 };

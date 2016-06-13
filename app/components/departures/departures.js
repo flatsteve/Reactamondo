@@ -13,8 +13,8 @@ class Departures extends React.Component {
         </h2>
 
         <div className="departures__board">
-          {this.props.busTimes.map(busDetails => {
-            return <DeparturesEntry details={busDetails} key={busDetails.id}/>;
+          {this.props.busTimes.map((busDetails, index) => {
+            return <DeparturesEntry details={busDetails} key={index}/>;
           })}
         </div>
       </div>

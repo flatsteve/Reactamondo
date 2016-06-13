@@ -22,6 +22,7 @@
     "eslint": "^2.11.1",
     "eslint-plugin-react": "^5.1.1",
     "file-loader": "^0.8.5",
+    "lodash": "^4.13.1",
     "postcss-browser-reporter": "^0.5.0",
     "postcss-cssnext": "^2.6.0",
     "postcss-import": "^8.1.2",

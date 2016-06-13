@@ -17,7 +17,7 @@ class DeparturesEntry extends React.Component {
         </h2>
         <h3>{this.props.details.destinationName}</h3>
         <h3 className="departures-entry__arrival">
-          Expected: { convertToMinutes(this.props.details.timeToStation) }
+          { convertToMinutes(this.props.details.timeToStation) }
         </h3>
       </div>
     );
