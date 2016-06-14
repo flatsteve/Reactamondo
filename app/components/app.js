@@ -28,7 +28,6 @@ class App extends React.Component {
         return busInfo.timeToStation > 0;
       });
 
-      console.log(updatedBusTimes[0]);
       this.setState({ busTimes: updatedBusTimes });
     };
 
