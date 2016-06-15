@@ -39,3 +39,7 @@ export function conectToHub(updateFunction) {
         });
     });
 }
+
+export function disconnectFromHub() {
+  $.connection.hub.stop();
+}

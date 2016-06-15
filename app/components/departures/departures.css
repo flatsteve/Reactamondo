@@ -1,5 +1,5 @@
-@import '../../variables.css';
-@import '../../animations.css';
+@import '../../common/variables.css';
+@import '../../common/animations.css';
 
 .departures__title {
   color: var(--yellow);

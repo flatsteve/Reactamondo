@@ -1,4 +1,4 @@
-@import '../../variables.css';
+@import '../../common/variables.css';
 
 .departures-entry {
   align-items: center;

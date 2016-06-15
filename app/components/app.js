@@ -1,54 +1,27 @@
 'use strict';
 
 import React from 'react';
-import { getBusTimes, conectToHub } from '../services/tfl';
-import { copyToCamelCase } from '../services/utils';
-import Departures from './departures/departures.js';
-import _ from 'lodash';
+import {IndexLink, Link} from 'react-router';
+import './app.css';
 
-class App extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      busTimes: [],
-      stationName: 'Loading'
-    };
-  }
-
-  componentDidMount() {
-    conectToHub(updateDepartures.bind(this));
-
-    function updateDepartures(data) {
-      let casedUpatedBusData = copyToCamelCase(data);
-      let busTimesCopy = _.cloneDeep(this.state.busTimes);
-      let updatedBusTimes = _.unionBy(casedUpatedBusData, busTimesCopy, 'id');
-      updatedBusTimes.sort((a, b) => { return a.timeToStation - b.timeToStation; });
-      updatedBusTimes = updatedBusTimes.filter(busInfo => {
-        return busInfo.timeToStation > 0;
-      });
-
-      this.setState({ busTimes: updatedBusTimes });
-    };
-
-    getBusTimes()
-      .then(function (data) {
-        data.sort((a, b) => { return a.timeToStation - b.timeToStation; });
-        this.setState({ busTimes: data, stationName: data[0].stationName });
-      }.bind(this));
-  }
-
+export default class App extends React.Component {
   render() {
     return (
       <div>
-        {(
-          this.state.busTimes.length ?
-            <Departures busTimes={this.state.busTimes} stationName={this.state.stationName}/>
-            : <h2 className="departures__title">Loading bus times...</h2>
-        )}
+        {
+          React.cloneElement(this.props.children, ...this.props, { key: undefined, ref: undefined })
+        }
+
+        <nav className="nav">
+          <IndexLink className="nav__item" activeClassName="nav__item--active" to="/">
+            Home
+          </IndexLink>
+          
+          <Link className="nav__item" activeClassName="nav__item--active" to="profile">
+            Profile
+          </Link>
+        </nav>
       </div>
     );
   }
 }
-
-export default App;

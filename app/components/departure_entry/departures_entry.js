@@ -4,7 +4,7 @@ import React from 'react';
 import { convertToMinutes } from '../../services/utils';
 import './departures_entry.css';
 
-class DeparturesEntry extends React.Component {
+export default class DeparturesEntry extends React.Component {
   constructor() {
     super();
   }
@@ -23,5 +23,3 @@ class DeparturesEntry extends React.Component {
     );
   }
 }
-
-export default DeparturesEntry;
