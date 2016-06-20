@@ -2,8 +2,8 @@
 
 .departures-entry {
   align-items: center;
-  background-color: var(--teal);
-  color: var(--yellow);
+  background-color: var(--blue);
+  color: var(--white);
   display: flex;
   font-family: monospace;
   margin-bottom: .25rem;
@@ -18,6 +18,10 @@
 
   &__arrival {
     margin: 0 1.25rem 0 auto;
+  }
+
+  &__arrival--due {
+    color: var(--green);
   }
 
   &:last-of-type {

@@ -18,6 +18,10 @@ export function getBusTimes() {
 }
 
 export function conectToHub(updateFunction) {
+  if (!window.$) {
+    return console.warn('SignalR not loaded, please check connection.');
+  }
+
   $.connection.hub.logging = true;
   $.connection.hub.url = "https://push-api.tfl.gov.uk/signalr/hubs/signalr";
 
@@ -41,5 +45,9 @@ export function conectToHub(updateFunction) {
 }
 
 export function disconnectFromHub() {
+  if (!window.$) {
+    return console.warn('SignalR not loaded.');
+  }
+
   $.connection.hub.stop();
 }

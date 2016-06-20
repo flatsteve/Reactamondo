@@ -10,7 +10,7 @@
   left: 0;
   overflow: hidden;
   width: 100%;
-  background-color: var(--blue);
+  background-color: var(--black);
 
   &__item {
     color: white;
@@ -22,7 +22,7 @@
   }
 
   &__item--active:before {
-    background-color: white;
+    background-color: var(--red);
     content: '';
     display: block;
     height: 4px;

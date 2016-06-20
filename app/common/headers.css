@@ -1,0 +1,9 @@
+@import './variables.css';
+
+.header {
+  margin-bottom: 1.75rem;
+
+  &--light {
+    color: var(--blue);
+  }
+}

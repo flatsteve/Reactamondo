@@ -1,0 +1,8 @@
+.profile {
+  align-items: center;
+  display: flex;
+}
+
+.profile__save {
+  margin-left: auto;
+}

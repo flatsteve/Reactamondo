@@ -7,6 +7,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import DeparturesEntry from '../departure_entry/departures_entry';
 import _ from 'lodash';
 import './departures.css';
+import '../../common/headers.css';
 
 export default class Departures extends React.Component {
   constructor() {
@@ -14,7 +15,7 @@ export default class Departures extends React.Component {
 
     this.state = {
       busTimes: [],
-      stationName: 'Loading'
+      stationName: null
     };
   }
 
@@ -37,7 +38,8 @@ export default class Departures extends React.Component {
       .then(function (data) {
         data.sort((a, b) => { return a.timeToStation - b.timeToStation; });
         this.setState({ busTimes: data, stationName: data[0].stationName });
-      }.bind(this));
+      }.bind(this))
+      .catch(error => { console.warn('Please check connection'); });
   }
 
   componentWillUnmount() {
@@ -48,18 +50,20 @@ export default class Departures extends React.Component {
   render() {
     return (
       <div>
-        <h2 className="departures__title">
-          Departures from {this.state.stationName}
+        <h2 className="header header--light">
+          {this.state.stationName ? `Departures from ${this.state.stationName}` : 'Loading departures...'}
         </h2>
 
-        <div className="departures__board">
-          <ReactCSSTransitionGroup transitionName="fade-in" transitionAppear={true} transitionAppearTimeout={300}
-            transitionEnterTimeout={300} transitionLeaveTimeout={300}>
-            {this.state.busTimes.map((busDetails, index) => {
-              return <DeparturesEntry details={busDetails} key={index}/>;
-            }) }
-          </ReactCSSTransitionGroup>
-        </div>
+        {this.state.busTimes.length ?
+          (<div className="departures__board">
+              <ReactCSSTransitionGroup transitionName="fade-in" transitionAppear={true} transitionAppearTimeout={300}
+                transitionEnterTimeout={300} transitionLeaveTimeout={300}>
+                {this.state.busTimes.map((busDetails, index) => {
+                  return <DeparturesEntry details={busDetails} key={index}/>;
+                }) }
+              </ReactCSSTransitionGroup>
+            </div>)
+          : 'Loading...'}
       </div>
     );
   }
