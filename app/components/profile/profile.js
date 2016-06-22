@@ -1,27 +1,25 @@
-'use strict';
-
 import React from 'react';
 import '../../common/buttons.css';
 import '../../common/forms.css';
 import './profile.css';
 
 export default class Profile extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      station: null,
       options: [
-        { label: 'Select your station', value: '' },
-        { label: 'Bus: Nat. Maritime Museum', value: 'bus' },
-        { label: 'DLR: Greenwich', value: 'dlr' },
-        { label: 'Train: Greenwich', value: 'train' },
+        { id: '490006196F', label: 'Nat. Maritime Museum', type: 'bus' },
+        { id: '490007513H', label: 'Greenwich High Road', type: 'bus' }
       ]
     };
   }
 
   change(event) {
-    console.log(event.target.value);
+    let stationId = event.target.value;
+    this.props.route.appState.station = this.state.options.find(station => {
+      return station.id === stationId;
+    });
   }
 
   render() {
@@ -32,9 +30,10 @@ export default class Profile extends React.Component {
         </h2>
 
         <div className="profile">
-          <select className="select" defaultValue="" onChange={this.change.bind(this) }>
+          <select className="select"
+            defaultValue={this.props.route.appState.station.id} onChange={this.change.bind(this) }>
             {this.state.options.map((option, index) => {
-              return <option value={option.value} key={index}>{option.label}</option>;
+              return <option value={option.id} key={index}>{option.label}</option>;
             }) }
           </select>
 

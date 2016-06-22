@@ -1,7 +1,7 @@
 'use strict';
 
-export function getBusTimes(naptanId) {
-  const busTimesEndpoint = `https://api.tfl.gov.uk/StopPoint/${naptanId}/Arrivals`;
+export function getBusTimes() {
+  const busTimesEndpoint = 'https://api.tfl.gov.uk/StopPoint/490006196F/Arrivals';
   const tflAuth = '?app_id=1ca97399&app_key=4b99b3621b6c8f7cd6c1a2d3431b022f';
 
   return new Promise(
@@ -17,7 +17,7 @@ export function getBusTimes(naptanId) {
   );
 }
 
-export function conectToHub(naptanId, updateFunction) {
+export function conectToHub(updateFunction) {
   if (!window.$) {
     return console.warn('SignalR not loaded, please check connection.');
   }
@@ -30,7 +30,7 @@ export function conectToHub(naptanId, updateFunction) {
 
   $.connection.hub.start()
     .done(function () {
-      var lineRooms = [{ "NaptanId": naptanId }];
+      var lineRooms = [{ "stationName": "National Maritime Museum", "NaptanId": "490006196F" }];
 
       hub.server.addLineRooms(lineRooms)
         .done(function () {

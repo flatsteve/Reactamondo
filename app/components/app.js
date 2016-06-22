@@ -7,7 +7,7 @@ import './app.css';
 export default class App extends React.Component {
   render() {
     return (
-      <div>
+      <div className="app-container">
         {
           React.cloneElement(this.props.children, ...this.props, { key: undefined, ref: undefined })
         }

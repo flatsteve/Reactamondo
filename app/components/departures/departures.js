@@ -6,12 +6,15 @@ import { copyToCamelCase } from '../../services/utils';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import DeparturesEntry from '../departure_entry/departures_entry';
 import _ from 'lodash';
+import { observer } from 'mobx-react';
+
 import './departures.css';
 import '../../common/headers.css';
 
+@observer
 export default class Departures extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       busTimes: [],
@@ -20,8 +23,6 @@ export default class Departures extends React.Component {
   }
 
   componentDidMount() {
-    tfl.conectToHub(updateDepartures.bind(this));
-
     function updateDepartures(data) {
       let casedUpatedBusData = copyToCamelCase(data);
       let busTimesCopy = _.cloneDeep(this.state.busTimes);
@@ -34,16 +35,18 @@ export default class Departures extends React.Component {
       this.setState({ busTimes: updatedBusTimes });
     };
 
-    tfl.getBusTimes()
+    tfl.getBusTimes(this.props.route.appState.station.id)
       .then(function (data) {
         data.sort((a, b) => { return a.timeToStation - b.timeToStation; });
         this.setState({ busTimes: data, stationName: data[0].stationName });
+
+        // Once bus times are initially loaded connect to live updates
+        tfl.conectToHub(this.props.route.appState.station.id, updateDepartures.bind(this));
       }.bind(this))
       .catch(error => { console.warn('Please check connection'); });
   }
 
   componentWillUnmount() {
-    console.log('unmounting');
     tfl.disconnectFromHub();
   }
 
@@ -51,18 +54,20 @@ export default class Departures extends React.Component {
     return (
       <div>
         <h2 className="header header--light">
-          {this.state.stationName ? `Departures from ${this.state.stationName}` : 'Loading departures...'}
+          {this.props.route.appState.station.label ?
+            `Departures from ${this.props.route.appState.station.label}`
+            : 'Loading departures...'}
         </h2>
 
         {this.state.busTimes.length ?
           (<div className="departures__board">
-              <ReactCSSTransitionGroup transitionName="fade-in" transitionAppear={true} transitionAppearTimeout={300}
-                transitionEnterTimeout={300} transitionLeaveTimeout={300}>
-                {this.state.busTimes.map((busDetails, index) => {
-                  return <DeparturesEntry details={busDetails} key={index}/>;
-                }) }
-              </ReactCSSTransitionGroup>
-            </div>)
+            <ReactCSSTransitionGroup transitionName="fade-in" transitionAppear={true} transitionAppearTimeout={300}
+              transitionEnterTimeout={300} transitionLeaveTimeout={300}>
+              {this.state.busTimes.map((busDetails, index) => {
+                return <DeparturesEntry details={busDetails} key={index}/>;
+              }) }
+            </ReactCSSTransitionGroup>
+          </div>)
           : 'Loading...'}
       </div>
     );
